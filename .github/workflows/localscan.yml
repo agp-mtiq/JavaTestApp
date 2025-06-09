@@ -27,9 +27,9 @@ jobs:
 
       - name: Run Evaluate Action
         id: evaluate
-        uses: sonatype/actions/evaluate@v1.3.0
+        uses: sonatype/actions/evaluate@v1
         with:
-          iq-server-url: https://19873dc31532.ngrok.app
+          iq-server-url: https://489348249c16.ngrok.app
           username: ${{ secrets.LOCAL_USR }}
           password: ${{ secrets.LOCAL_PSCD }}
           application-id: Javatestapp
