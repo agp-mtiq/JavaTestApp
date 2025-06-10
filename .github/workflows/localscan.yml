@@ -32,7 +32,7 @@ jobs:
           iq-server-url: https://489348249c16.ngrok.app
           username: ${{ secrets.LOCAL_USR }}
           password: ${{ secrets.LOCAL_PSCD }}
-          application-id: JavaTestApp__msegovia-sntyp
+          application-id: javatestapp
           scan-targets: '**/*.jar'
           sarif-file: 'sariffile.sarif'
           upload-sarif-file: 'true'
