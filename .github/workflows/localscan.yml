@@ -29,11 +29,9 @@ jobs:
         id: evaluate
         uses: sonatype/actions/evaluate@v1
         with:
-          iq-server-url: https://489348249c16.ngrok.app
+          iq-server-url: https://cf935b21781c.ngrok.app
           username: ${{ secrets.LOCAL_USR }}
           password: ${{ secrets.LOCAL_PSCD }}
           application-id: javatestapp
           scan-targets: '**/*.jar'
-          sarif-file: 'sariffile.sarif'
-          upload-sarif-file: 'true'
-          enable-callflow: true 
+          enable-reachability: true 
