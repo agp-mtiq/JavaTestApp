@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
+  <serialNumber>urn:uuid:8a8a8a8a-8a8a-4a4a-8a8a-8a8a8a8a8a8a</serialNumber>
+  <metadata>
+    <timestamp>2025-10-30T17:18:20Z</timestamp>
+    <tools>
+      <tool>
+        <vendor>GitHub Copilot Chat Assistant</vendor>
+        <name>Manual SBOM Generator</name>
+        <version>1.0</version>
+      </tool>
+    </tools>
+    <authors>
+      <author>
+        <name>msegovia-sntyp</name>
+      </author>
+    </authors>
+    <component type="application">
+      <group>com.example</group>
+      <name>JavaTestApp</name>
+      <version>1.0-SNAPSHOT</version>
+      <description>Java application with vulnerable dependencies for testing</description>
+      <purl>pkg:maven/com.example/JavaTestApp@1.0-SNAPSHOT</purl>
+      <licenses>
+        <license>
+          <name>NOASSERTION</name>
+        </license>
+      </licenses>
+    </component>
+  </metadata>
+  <components>
+    <component type="library">
+      <group>com.fasterxml.jackson.core</group>
+      <name>jackson-databind</name>
+      <version>2.15.4</version>
+      <purl>pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.4</purl>
+      <licenses>
+        <license>
+          <name>NOASSERTION</name>
+        </license>
+      </licenses>
+    </component>
+    <component type="library">
+      <group>commons-io</group>
+      <name>commons-io</name>
+      <version>2.6</version>
+      <purl>pkg:maven/commons-io/commons-io@2.6</purl>
+      <licenses>
+        <license>
+          <name>NOASSERTION</name>
+        </license>
+      </licenses>
+    </component>
+  </components>
+</bom>
