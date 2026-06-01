@@ -1,0 +1,114 @@
+# agp.yml — Sonatype Guide Agentic Patches configuration
+# AGP works without this file, but it gives you full control
+# over which paths to ignore, how PRs are titled, grouping
+# rules, auto-merge behaviour, and per-project overrides.
+# Learn more: https://guide.sonatype.com
+#
+# Schema version — always "1"
+version: "1"
+
+# ── Ignore ──────────────────────────────────────────────────────────────────
+# Paths and packages AGP should never touch.
+ignore:
+  # Maven build output and IDE files — never scan these
+  paths:
+    - "**/target/**"
+    - "**/.idea/**"
+    - "**/sbom.json"
+    - "**/sbom.xml"
+
+  # Packages to pin and never auto-upgrade.
+  # Add entries like "com.example:some-lib" to freeze a dependency.
+  packages: []
+  #   - "com.example:some-internal-lib"
+
+# ── Validation ──────────────────────────────────────────────────────────────
+# Commands AGP runs after applying an upgrade to confirm the build still
+# passes. Uses this project's actual Maven build commands.
+validation:
+  enabled: true
+  commands:
+    - "mvn compile -q"   # Compile only — fast feedback on broken deps
+    - "mvn test -q"      # Run unit tests to catch runtime breakage
+  timeout: 10m
+
+# ── Pull request settings ────────────────────────────────────────────────────
+pr:
+  # Labels applied to every AGP pull request
+  labels:
+    - dependencies
+    - automated
+    - agp
+
+  # Open as draft so humans review before merging
+  draft: false
+
+  # PR title template — {{.GroupName}} is replaced by the dep group name
+  titleTemplate: "chore(deps): {{.GroupName}}"
+
+  # Branch name template — {{.GroupID}} is a stable slug for the group
+  branchTemplate: "agp/{{.GroupID}}"
+
+  # GitHub usernames or team slugs to request review from (optional)
+  reviewers: []
+  #   - octocat
+  #   - org/team-name
+
+# ── Rate limiting ────────────────────────────────────────────────────────────
+# Prevents AGP from flooding the repository with open PRs.
+limits:
+  # Maximum number of AGP PRs allowed open simultaneously
+  maxOpenPRs: 5
+
+  # Maximum new PRs AGP may open in a single run
+  maxPRsPerRun: 10
+
+  # Minimum wait before re-opening a PR for the same upgrade
+  waitPeriod:
+    major: 7d   # Wait 7 days before retrying a major bump
+    minor: 3d   # Wait 3 days before retrying a minor bump
+    patch: 1d   # Wait 1 day before retrying a patch bump
+
+# ── Auto-merge ───────────────────────────────────────────────────────────────
+# Disabled by default — enable only after you trust AGP's validation.
+# Requires branch protection rules with required status checks enabled.
+automerge:
+  enabled: false
+  # method: squash   # "squash" | "merge" | "rebase"
+
+# ── Grouping ─────────────────────────────────────────────────────────────────
+# Controls how dependency upgrades are grouped into PRs.
+grouping:
+  # "individual" — one PR per dependency (easiest to review / revert)
+  # "ecosystem"  — one PR per ecosystem (fewer PRs, harder to revert)
+  strategy: individual
+
+  # Custom grouping rules — bundle specific deps into a single PR.
+  # Useful for tightly coupled libs (e.g., all jackson-* together).
+  rules: []
+  #   - name: "jackson"
+  #     packages:
+  #       - "com.fasterxml.jackson.*"
+
+# ── Projects (monorepo) ───────────────────────────────────────────────────────
+# This is a single-module Maven project — no sub-projects to configure.
+# If you restructure into a multi-module layout, uncomment and populate
+# this section with each module's path and validation commands.
+#
+# projects:
+#   core:
+#     path: core
+#     ecosystem: maven
+#     validation:
+#       enabled: true
+#       commands:
+#         - "mvn compile -q -pl core"
+#         - "mvn test -q -pl core"
+#   api:
+#     path: api
+#     ecosystem: maven
+#     validation:
+#       enabled: true
+#       commands:
+#         - "mvn compile -q -pl api"
+#         - "mvn test -q -pl api"
