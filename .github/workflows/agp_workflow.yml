@@ -102,11 +102,9 @@ jobs:
           docker-registry: sonatype.repo.sonatype.app/docker-all
 
           # ── Docker credentials ──────────────────────────────────────────
-          # Uncomment if your environment requires authenticated Docker pulls
-          # from the registry above.
-          # docker-username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          # docker-password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-
+          # Required for authenticated pulls from sonatype.repo.sonatype.app
+          docker-username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          docker-password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
           # ── npm / yarn / pnpm ───────────────────────────────────────────
           # Not applicable — this project has no Node.js components.
           # Uncomment and populate if npm is added later.
@@ -148,7 +146,6 @@ jobs:
           # Only needed if OIDC is not available in your environment.
           # AGP_API_TOKEN: ${{ secrets.AGP_API_TOKEN }}
 
-          # ── AGP API URL (optional) ──────────────────────────────────────
-          # Auto-discovered via OIDC. Override only if using a self-hosted
-          # Sonatype Guide instance.
-          # AGP_API_URL: ${{ vars.AGP_API_URL }}
+          # ── AGP API URL ─────────────────────────────────────────────────
+          # Required until the AGP image defaults to the .com URL.
+          AGP_API_URL: https://api.guide.sonatype.com
