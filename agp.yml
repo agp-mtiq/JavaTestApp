@@ -39,6 +39,7 @@ pr:
     - dependencies
     - automated
     - agp
+    - demopm
 
   # Open as draft so humans review before merging
   draft: false
@@ -58,7 +59,7 @@ pr:
 # Prevents AGP from flooding the repository with open PRs.
 limits:
   # Maximum number of AGP PRs allowed open simultaneously
-  maxOpenPRs: 5
+  maxOpenPRs: 7
 
   # Maximum new PRs AGP may open in a single run
   maxPRsPerRun: 10
