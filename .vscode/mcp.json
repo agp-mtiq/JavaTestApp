@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "sonatype-mcp": {
+      "url": "https://mcp.guide.sonatype.com/mcp",
+      "type": "http",
+      "headers": {
+        "Authorization": "Bearer sonatype_pat_kZozMnLNT1xS6WMuzDDH7N-V2OwSq2S3PGApxdF8j3eAzbJi"
+      }
+    }
+  }
+}
