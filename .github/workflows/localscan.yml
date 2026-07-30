@@ -1,9 +1,6 @@
 name: Local Sonatype Scan
 
 on:
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -26,7 +23,7 @@ jobs:
         id: evaluate
         uses: sonatype/actions/evaluate@v1
         with:
-          iq-server-url: https://cf935b21781c.ngrok.app
+          iq-server-url: https://ece4-186-29-179-213.ngrok-free.app
           username: ${{ secrets.LOCAL_USR }}
           password: ${{ secrets.LOCAL_PSCD }}
           application-id: javatestapp
